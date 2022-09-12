@@ -12,7 +12,9 @@ from random import choice
 
 bot_token = ""
 chat_id = ""
-url = "https://holland2stay.com/residences.html?available_to_book=179"
+
+price_range = "1-1499"
+url = f"https://holland2stay.com/residences.html?available_to_book=179&price={price_range}"
 
 filters = ["maastricht", "rive tower 1"]
 
@@ -55,7 +57,7 @@ try:
     print("Firefox started")
     residences_texts = get_list_of_residences_texts(driver, filters)
     if residences_texts:
-        send_telegram_message(f"""There are {len(residences_texts)} apartment(s) available to book directly (except {', '.join(filters)}).\n{url}\nRandom apartment:\n{choice(residences_texts)}""")
+        send_telegram_message(f"""There are {len(residences_texts)} apartment(s) available to book directly with a price range {price_range}, (except {', '.join(filters)}).\n{url}\nRandom apartment:\n{choice(residences_texts)}""")
     today = str(datetime.datetime.now().date())
     last_alive_date = read_last_alive_date()
     if (get_current_hour() >= 9) and (((last_alive_date is not None) and (last_alive_date < today)) or (last_alive_date is None)):
