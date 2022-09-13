@@ -9,9 +9,15 @@ from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.firefox.service import Service
 from webdriver_manager.firefox import GeckoDriverManager
 from random import choice
+import json
 
-bot_token = ""
-chat_id = ""
+def read_creds():
+    with open('creds.json', 'r') as f:
+        creds = json.load(f)
+    return creds['bot_token'], creds['chat_id']
+
+bot_token, chat_id = read_creds()
+
 price_range = "1-1499"
 url = f"https://holland2stay.com/residences.html?available_to_book=179&price={price_range}"
 
