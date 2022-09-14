@@ -64,7 +64,8 @@ try:
     print("Firefox started")
     residences_texts = get_list_of_residences_texts(driver, filters)
     if residences_texts:
-        send_telegram_message(f"""{len(residences_texts)} apartment(s) available, price range {price_range}, (except {', '.join(filters)}).\n{url}\nRandom apartment:\n{choice(residences_texts)}""")
+        send_telegram_message(f"""{len(residences_texts)} apartment(s) available, price range {price_range}, (except {', '.join(filters)}).\n{url}""")
+        send_telegram_message(f"Random apartment:\n{choice(residences_texts)}")
     today = str(datetime.datetime.now().date())
     last_alive_date = read_last_alive_date()
     if (get_current_hour() >= 9) and (((last_alive_date is not None) and (last_alive_date < today)) or (last_alive_date is None)):
